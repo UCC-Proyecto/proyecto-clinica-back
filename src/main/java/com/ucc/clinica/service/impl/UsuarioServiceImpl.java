@@ -4,6 +4,7 @@ import com.ucc.clinica.dto.request.RegisterRequest;
 import com.ucc.clinica.dto.response.RegisterReponse;
 import com.ucc.clinica.entity.Rol;
 import com.ucc.clinica.entity.Usuario;
+import com.ucc.clinica.exception.EmailDuplicadoException;
 import com.ucc.clinica.repository.UsuarioRepository;
 import com.ucc.clinica.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public RegisterReponse registrarUsuario(RegisterRequest registerRequest) {
         if(usuarioRepository.existsUsuarioByEmail(registerRequest.getEmail())) {
-            throw new RuntimeException("El email ya se encuentra registrado");
+            throw new EmailDuplicadoException("El email ya se encuentra registrado.");
         }
 
         Usuario usuario = Usuario.builder()
