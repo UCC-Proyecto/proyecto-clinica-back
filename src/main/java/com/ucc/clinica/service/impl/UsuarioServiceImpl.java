@@ -6,14 +6,14 @@ import com.ucc.clinica.entity.Rol;
 import com.ucc.clinica.entity.Usuario;
 import com.ucc.clinica.repository.UsuarioRepository;
 import com.ucc.clinica.service.UsuarioService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
 
     @Override
     public RegisterReponse registrarUsuario(RegisterRequest registerRequest) {
