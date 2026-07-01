@@ -11,6 +11,8 @@ public class RegisterRequest {
 
     @NotBlank
     private String nombre;
+    @NotBlank
+    private String apellido;
     @Email
     @NotBlank
     private String email;

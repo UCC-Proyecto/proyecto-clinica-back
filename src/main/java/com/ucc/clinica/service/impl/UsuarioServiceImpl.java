@@ -24,6 +24,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         Usuario usuario = Usuario.builder()
                 .nombre(registerRequest.getNombre())
+                .apellido(registerRequest.getApellido())
                 .email(registerRequest.getEmail())
                 .password(registerRequest.getPassword())
                 .rol(Rol.PACIENTE)
