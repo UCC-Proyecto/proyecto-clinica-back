@@ -8,6 +8,7 @@ import com.ucc.clinica.exception.EmailDuplicadoException;
 import com.ucc.clinica.repository.UsuarioRepository;
 import com.ucc.clinica.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public RegisterReponse registrarUsuario(RegisterRequest registerRequest) {
@@ -26,7 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .nombre(registerRequest.getNombre())
                 .apellido(registerRequest.getApellido())
                 .email(registerRequest.getEmail())
-                .password(registerRequest.getPassword())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .rol(Rol.PACIENTE)
                 .build();
 
