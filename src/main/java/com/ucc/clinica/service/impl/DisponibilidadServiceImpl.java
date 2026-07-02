@@ -11,6 +11,8 @@ import com.ucc.clinica.service.DisponibilidadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DisponibilidadServiceImpl implements DisponibilidadService {
@@ -38,5 +40,22 @@ public class DisponibilidadServiceImpl implements DisponibilidadService {
                 .estado(
                         disponibilidad.getEstado().name()
                 ).build();
+    }
+
+    @Override
+    public List<DisponibilidadResponse> consultarDisponibilidades() {
+
+        List<Disponibilidad> disponibilidades = disponibilidadRepository.findByEstado(EstadoDisponibilidad.DISPONIBLE);
+
+        return disponibilidades.stream()
+                .map(disponibilidad ->
+                        DisponibilidadResponse.builder()
+                                .id(disponibilidad.getId())
+                                .medico(disponibilidad.getMedico().getNombre() + " " + disponibilidad.getMedico().getApellido())
+                                .fecha(disponibilidad.getFecha())
+                                .hora(disponibilidad.getHora())
+                                .estado(disponibilidad.getEstado().name())
+                                .build()
+                ).toList();
     }
 }
