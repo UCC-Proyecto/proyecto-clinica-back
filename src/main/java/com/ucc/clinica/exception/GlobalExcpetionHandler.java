@@ -21,4 +21,32 @@ public class GlobalExcpetionHandler {
                 .status(HttpStatus.UNAUTHORIZED)
                 .body(ex.getMessage());
     }
+
+    @ExceptionHandler(DisponibilidadNoEncontradaException.class)
+    public ResponseEntity<String> handleDisponibilidadNoEncontrada(DisponibilidadNoEncontradaException ex){
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(HorarioNoDisponibleException.class)
+    public ResponseEntity<String> handleHorarioNoDisponible(HorarioNoDisponibleException ex){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(MedicoNoEncontradoException.class)
+    public ResponseEntity<String> handleMedicoNoEncontrado(MedicoNoEncontradoException ex){
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(PacienteNoEncontradoException.class)
+    public ResponseEntity<String> handlePacienteNoEncontrado(PacienteNoEncontradoException ex){
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
 }

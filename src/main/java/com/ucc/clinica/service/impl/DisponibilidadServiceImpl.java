@@ -5,6 +5,7 @@ import com.ucc.clinica.dto.response.DisponibilidadResponse;
 import com.ucc.clinica.entity.Disponibilidad;
 import com.ucc.clinica.entity.EstadoDisponibilidad;
 import com.ucc.clinica.entity.Medico;
+import com.ucc.clinica.exception.MedicoNoEncontradoException;
 import com.ucc.clinica.repository.DisponibilidadRepository;
 import com.ucc.clinica.repository.MedicoRepository;
 import com.ucc.clinica.service.DisponibilidadService;
@@ -22,7 +23,7 @@ public class DisponibilidadServiceImpl implements DisponibilidadService {
     @Override
     public DisponibilidadResponse registrar(DisponibilidadRequest request) {
         Medico medico = medicoRepository.findById(request.getMedicoId())
-                .orElseThrow(() -> new RuntimeException("Medico no encontrado"));
+                .orElseThrow(() -> new MedicoNoEncontradoException("Medico con id " + request.getMedicoId() + " no encontrado"));
         Disponibilidad disponibilidad = Disponibilidad.builder()
                 .fecha(request.getFecha())
                 .hora(request.getHora())

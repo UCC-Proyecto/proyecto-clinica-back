@@ -3,6 +3,9 @@ package com.ucc.clinica.service.impl;
 import com.ucc.clinica.dto.request.AgendarCitaRequest;
 import com.ucc.clinica.dto.response.AgendarCitaResponse;
 import com.ucc.clinica.entity.*;
+import com.ucc.clinica.exception.DisponibilidadNoEncontradaException;
+import com.ucc.clinica.exception.HorarioNoDisponibleException;
+import com.ucc.clinica.exception.PacienteNoEncontradoException;
 import com.ucc.clinica.repository.CitaRepository;
 import com.ucc.clinica.repository.DisponibilidadRepository;
 import com.ucc.clinica.repository.UsuarioRepository;
@@ -22,14 +25,14 @@ public class CitaServiceImpl implements CitaService {
 
         Usuario paciente = usuarioRepository.findById(
                 request.getPacienteId())
-                .orElseThrow(()-> new RuntimeException("Paciente no encontrado"));
+                .orElseThrow(()-> new PacienteNoEncontradoException("Paciente no encontrado"));
 
         Disponibilidad disponibilidad = disponibilidadRepository.findById(
                 request.getDisponibilidadId())
-                .orElseThrow(()-> new RuntimeException("Disponibilidad no encontrada"));
+                .orElseThrow(()-> new DisponibilidadNoEncontradaException("Disponibilidad no encontrada"));
 
         if(disponibilidad.getEstado() != EstadoDisponibilidad.DISPONIBLE){
-            throw new RuntimeException("El horario no está disponible");
+            throw new HorarioNoDisponibleException("El horario seleccionado no está disponible");
         }
 
         disponibilidad.setEstado(EstadoDisponibilidad.OCUPADO);
