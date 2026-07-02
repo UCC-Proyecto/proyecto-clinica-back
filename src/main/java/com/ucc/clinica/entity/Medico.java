@@ -17,4 +17,7 @@ public class Medico {
     private Long id;
     private String nombre;
     private String apellido;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "especialidad_id")
+    private Especialidad especialidad;
 }
