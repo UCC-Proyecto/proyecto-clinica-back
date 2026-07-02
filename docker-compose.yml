@@ -1,0 +1,28 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: clinica-mysql
+
+    environment:
+      MYSQL_DATABASE: clinica_db
+      MYSQL_ROOT_PASSWORD: root
+
+    ports:
+      - "3306:3306"
+
+  backend:
+    build: .
+    container_name: clinica-backend
+
+    depends_on:
+      - mysql
+
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/clinica_db
+      DB_USER: root
+      DB_PASSWORD: root
+      JWT_SECRET: clave-secreta-super-segura-para-jwt-2026
+
+    ports:
+      - "8080:8080"
