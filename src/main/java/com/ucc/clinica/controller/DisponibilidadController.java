@@ -2,7 +2,6 @@ package com.ucc.clinica.controller;
 
 import com.ucc.clinica.dto.request.DisponibilidadRequest;
 import com.ucc.clinica.dto.response.DisponibilidadResponse;
-import com.ucc.clinica.entity.Disponibilidad;
 import com.ucc.clinica.service.DisponibilidadService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
