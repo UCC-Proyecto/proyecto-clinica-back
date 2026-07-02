@@ -20,7 +20,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/**",
-                                "/api/pacientes/**"
+                                "/api/pacientes/**",
+                                "/api/disponibilidades/**"
                         ).permitAll()
                         .anyRequest()
                         .authenticated()
