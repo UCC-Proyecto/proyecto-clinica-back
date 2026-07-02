@@ -8,10 +8,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/disponibilidades")
@@ -22,5 +21,12 @@ public class DisponibilidadController {
     @PostMapping
     public ResponseEntity<DisponibilidadResponse> registrar(@Valid @RequestBody DisponibilidadRequest disponibilidadrequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(disponibilidadService.registrar(disponibilidadrequest));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DisponibilidadResponse>> consultarDisponibles() {
+        return ResponseEntity.ok(
+                disponibilidadService.consultarDisponibilidades()
+        );
     }
 }
