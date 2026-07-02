@@ -1,17 +1,27 @@
 package com.ucc.clinica.security;
 
-import com.ucc.clinica.dto.request.LoginRequest;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
-@Component
+@Service
 public class JwtService {
-    private static final String SECRET_KEY = "clave-secreta";
+
+    @Value("${jwt.secret}")
+    private String secretKey;
 
     public String generateJwtToken(String email) {
+
+        SecretKey key = Keys.hmacShaKeyFor(
+                secretKey.getBytes(StandardCharsets.UTF_8)
+        );
+
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date())
@@ -20,7 +30,7 @@ public class JwtService {
                 )
                 .signWith(
                         SignatureAlgorithm.HS256,
-                        SECRET_KEY
+                        secretKey.getBytes(StandardCharsets.UTF_8)
                 )
                 .compact();
     }
