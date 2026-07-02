@@ -1,5 +1,6 @@
 package com.ucc.clinica.dto.response;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
+@Builder
 public class AgendarCitaResponse {
     private Long id;
     private String paciente;
