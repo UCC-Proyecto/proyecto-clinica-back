@@ -37,3 +37,9 @@ jobs:
       - name: Execute tests
         run: ./mvnw test
 
+      - name: Package application
+        run: ./mvnw clean package
+
+      - name: Build Docker image
+        run: docker build -t clinica-backend .
+
