@@ -62,7 +62,7 @@ public class CitaServiceImpl implements CitaService {
     @Override
     public List<HistorialCitaResponse> listarPorPaciente(Long pacienteId) {
 
-        List<Cita> citas = citaRepository.findByPacienteId(pacienteId);
+        List<Cita> citas = citaRepository.findByUsuario_Id(pacienteId);
         return citas.stream().map(
                 cita -> HistorialCitaResponse.builder()
                         .id(cita.getId())

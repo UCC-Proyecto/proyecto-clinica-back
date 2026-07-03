@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CitaRepository extends CrudRepository<Cita, Long> {
-    List<Cita> findByPacienteId(Long pacienteId);
+    List<Cita> findByUsuario_Id(Long pacienteId);
 }
