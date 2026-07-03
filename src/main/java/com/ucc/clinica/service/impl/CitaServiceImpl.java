@@ -2,6 +2,7 @@ package com.ucc.clinica.service.impl;
 
 import com.ucc.clinica.dto.request.AgendarCitaRequest;
 import com.ucc.clinica.dto.response.AgendarCitaResponse;
+import com.ucc.clinica.dto.response.HistorialCitaResponse;
 import com.ucc.clinica.entity.*;
 import com.ucc.clinica.exception.DisponibilidadNoEncontradaException;
 import com.ucc.clinica.exception.HorarioNoDisponibleException;
@@ -12,6 +13,7 @@ import com.ucc.clinica.repository.UsuarioRepository;
 import com.ucc.clinica.service.CitaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -55,5 +57,21 @@ public class CitaServiceImpl implements CitaService {
                 .hora(disponibilidad.getHora())
                 .estadoCita(cita.getEstadoCita().name())
                 .build();
+    }
+
+    @Override
+    public List<HistorialCitaResponse> listarPorPaciente(Long pacienteId) {
+
+        List<Cita> citas = citaRepository.findByPacienteId(pacienteId);
+        return citas.stream().map(
+                cita -> HistorialCitaResponse.builder()
+                        .id(cita.getId())
+                        .medico(cita.getDisponibilidad().getMedico().getNombre() + " " + cita.getDisponibilidad().getMedico().getApellido())
+                        .fecha(cita.getDisponibilidad().getFecha())
+                        .hora(cita.getDisponibilidad().getHora())
+                        .estado(cita.getEstadoCita().name())
+                        .build()
+        ).toList(
+        );
     }
 }
