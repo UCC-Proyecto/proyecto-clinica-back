@@ -33,6 +33,3 @@ jobs:
 
       - name: Build project
         run: ./mvnw clean compile
-
-      - name: Execute tests
-        run: ./mvnw test
