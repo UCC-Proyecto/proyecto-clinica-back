@@ -63,4 +63,11 @@ public class GlobalExcpetionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ex.getMessage());
     }
+
+    @ExceptionHandler(DatoObligatorioException.class)
+    public ResponseEntity<String> handleDatoObligatorio(DatoObligatorioException ex){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
 }

@@ -13,5 +13,5 @@ public class MedicoRequest {
     @NotBlank(message = "El apellido es obligatorio")
     private String apellido;
     @NotNull(message = "El ID de especialidad es obligatorio")
-    private Long Especialidad_id;
+    private Long especialidadId;
 }

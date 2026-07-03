@@ -4,6 +4,7 @@ import com.ucc.clinica.dto.request.MedicoRequest;
 import com.ucc.clinica.dto.response.MedicoResponse;
 import com.ucc.clinica.entity.Especialidad;
 import com.ucc.clinica.entity.Medico;
+import com.ucc.clinica.exception.DatoObligatorioException;
 import com.ucc.clinica.exception.EspecialidadNoEncontradaException;
 import com.ucc.clinica.repository.EspecialidadRepository;
 import com.ucc.clinica.repository.MedicoRepository;
@@ -20,8 +21,8 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     public MedicoResponse crearMedico(MedicoRequest medicoRequest) {
 
-        Especialidad especialidad = especialidadRepository.findById(medicoRequest.getEspecialidad_id()).orElseThrow(
-                () -> new EspecialidadNoEncontradaException("Especialidad con ID " + medicoRequest.getEspecialidad_id() + " no encontrada")
+        Especialidad especialidad = especialidadRepository.findById(medicoRequest.getEspecialidadId()).orElseThrow(
+                () -> new EspecialidadNoEncontradaException("Especialidad con ID " + medicoRequest.getEspecialidadId() + " no encontrada")
         );
 
         Medico medico = Medico.builder()
