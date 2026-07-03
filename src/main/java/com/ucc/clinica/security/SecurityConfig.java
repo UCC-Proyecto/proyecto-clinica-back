@@ -22,7 +22,8 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/api/pacientes/**",
                                 "/api/disponibilidades/**",
-                                "/api/citas/**"
+                                "/api/citas/**",
+                                "/api/especialidades/**"
                         ).permitAll()
                         .anyRequest()
                         .authenticated()
