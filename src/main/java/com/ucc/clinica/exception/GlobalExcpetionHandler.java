@@ -49,4 +49,11 @@ public class GlobalExcpetionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ex.getMessage());
     }
+
+    @ExceptionHandler(EspecialidadDuplicadaException.class)
+    public ResponseEntity<String> handleEspecialidadDuplicada(EspecialidadDuplicadaException ex){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
 }
