@@ -56,4 +56,11 @@ public class GlobalExcpetionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
     }
+
+    @ExceptionHandler(EspecialidadNoEncontradaException.class)
+    public ResponseEntity<String> handleEspecialidadNoEncontrada(EspecialidadNoEncontradaException ex){
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
 }
